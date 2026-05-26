@@ -43,6 +43,29 @@ pipeline {
             }
          }
         }
+       
+  stage('Build Backend Docker Image') {
+      steps {
+        dir('backend') {
+          sh """
+            echo "Building backend image..."
+            docker build -t ${BACKEND_IMAGE}:${IMAGE_TAG} -t ${BACKEND_IMAGE}:latest .
+          """
+        }
+      }
+    }
+
+stage('Build Frontend Docker Image') {
+      steps {
+        dir('frontend') {
+          sh """
+            echo "Building frontend image..."
+            docker build -t ${FRONTEND_IMAGE}:${IMAGE_TAG} -t ${FRONTEND_IMAGE}:latest .
+          """
+        }
+      }
+    }
+
   
 }
 
