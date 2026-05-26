@@ -55,7 +55,7 @@ environment {
         dir('backend') {
           sh """
             echo "Building backend image..."
-            docker build -t ${BACKEND_IMAGE}:${IMAGE_TAG} -t ${BACKEND_IMAGE}:latest .
+            docker build -t ${BACKEND_IMAGE}:${IMAGE_TAG} .
           """
         }
       }
@@ -66,7 +66,7 @@ stage('Build Frontend Docker Image') {
         dir('frontend') {
           sh """
             echo "Building frontend image..."
-            docker build -t ${FRONTEND_IMAGE}:${IMAGE_TAG} -t ${FRONTEND_IMAGE}:latest .
+            docker build -t ${FRONTEND_IMAGE}:${IMAGE_TAG} .
           """
         }
       }
