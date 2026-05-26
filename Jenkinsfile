@@ -71,6 +71,33 @@ stage('Build Frontend Docker Image') {
         }
       }
     }
+stage('Smoke Test - Backend') {
+  steps {
+    sh """
+      echo "Starting backend container for smoke test..."
+      docker rm -f backend-test || true
+
+      docker run -d --name backend-test -p 8081:8080 ${BACKEND_IMAGE}:${IMAGE_TAG}
+
+      echo "Waiting for backend to be UP..."
+      for i in \$(seq 1 25); do
+        if curl -sf http://localhost:8081/actuator/health > /dev/null; then
+          echo "✅ Backend is healthy"
+          exit 0
+        fi
+        sleep 3
+      done
+
+      echo "❌ Backend not healthy"
+      docker logs backend-test || true
+      exit 1
+    """
+  }
+}
+
+
+
+    
 
   
 }
