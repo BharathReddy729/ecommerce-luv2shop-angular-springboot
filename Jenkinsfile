@@ -5,6 +5,12 @@ pipeline {
     timestamps()
   }
 
+environment {
+    // Local image names (later we will change to ECR/DockerHub)
+    BACKEND_IMAGE  = "ecommerce-backend"
+    FRONTEND_IMAGE = "ecommerce-frontend"
+  }
+
   stages {
     stage('Checkout') {
       steps {
