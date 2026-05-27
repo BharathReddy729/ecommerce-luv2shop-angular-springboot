@@ -11,5 +11,5 @@ RUN mvn -f /home/app/pom.xml clean package
 #
 FROM eclipse-temurin:17-jre-jammy
 COPY --from=build /home/app/target/spring-boot-ecommerce-0.0.1-SNAPSHOT.jar /usr/local/lib/spring-boot-ecommerce.jar
-EXPOSE 8443
+EXPOSE 8081
 ENTRYPOINT ["java","-jar","/usr/local/lib/spring-boot-ecommerce.jar"]
